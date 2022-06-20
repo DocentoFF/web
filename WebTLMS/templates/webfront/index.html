@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=960">
+	<title>TChat</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="{% static '/webfront/css/style.css' %}">
+</head>
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="wrp">
+				<p>Header</p>
+			</div>
+		</header>
+		<div class="middle">
+			<div class="wrp">
+				<div class="container">
+					<main class="content">
+						<form method="POST" action="create/">
+        				{% csrf_token %}
+        				<p>
+            				<label>Введитe ID бота</label><br>
+            				<input type="text" name="id_bot" />
+        				</p>
+						<p>
+            				<label>Введитe ID Чата</label><br>
+            				<input type="text" name="id_chat" />
+        				</p>
+						<p>
+            				<label>Введитe ID Процесса</label><br>
+            				<input type="text" name="NameProcess" />
+        				</p>
+						<p>
+            				<label>Введитe имя папки курса</label><br>
+            				<input type="text" name="CourseFolder" />
+        				</p>
+        				<input type="submit" value="Сохранить" >
+    				</form>
+						<br>
+						<hr>
+						<br>
+						<p>Список курсов</p>
+						{% for tttable in tttable %}
+							<tr class='success'>
+								<td>{{ tttable.id }}</td>
+								<td>{{ tttable.NameProcess }}</td>
+								<td>{{ tttable.IDBot }}</td>
+								<td>{{ tttable.IDChat }}</td>
+								<td>{{ tttable.CourseFolder }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+					</main>
+					<main class="content">
+						<p>Список ботов</p>
+						{% for bot in bots %}
+							<td>{{ bot.NameBot }}</td>
+							<br>
+						{% endfor %}
+						<select name="<Боты>">
+							<option disabled>Выберите бот</option>
+							{% for bot in bots %}
+							    <options value="{{ bot.NameBot }}">{{ bot.IDBot }}</options>
+							{% endfor %}
+						</select>
+					</main>
+					<main class="content">
+						<br>
+						<hr>
+						<br>
+						<p>Список Пользователей</p>
+						{% for auth in auth %}
+							<tr class='success'>
+								<td>{{ auth.id }}</td>
+								<td>{{ auth.login }}</td>
+								<td>{{ auth.l_name }}</td>
+								<td>{{ auth.f_name }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>StudProgramName</p>
+						{% for sp in sp %}
+							<tr class='success'>
+								<td>{{ sp.id }}</td>
+								<td>{{ sp.StudProgramName }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Group Access</p>
+						{% for gaccess in gaccess %}
+							<tr class='success'>
+								<td>{{ gaccess.id }}</td>
+								<td>{{ gaccess.G_access_Name }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Список курсов</p>
+						{% for course_table in course_table %}
+							<tr class='success'>
+								<td>{{ course_table.id }}</td>
+								<td>{{ course_table.CourseName }}</td>
+								<td>{{ course_table.CourseFolder }}</td>
+								<td>{{ course_table.Maker }}</td>
+								<td>{{ course_table.StudProgram }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Состав курса</p>
+						{% for course_name in course_name %}
+							<tr class='success'>
+								<td>{{ course_name.id }}</td>
+								<td>{{ course_name.type_STR }}</td>
+								<td>{{ course_name.QorDelay }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Список Каналов</p>
+						{% for chat in chat %}
+							<tr class='success'>
+								<td>{{ chat.id }}</td>
+								<td>{{ chat.NameChat }}</td>
+								<td>{{ chat.IDChat }}</td>
+								<td>{{ chat.ChatLock }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Лог запусков</p>
+						{% for llog in llog %}
+							<tr class='success'>
+								<td>{{ llog.id }}</td>
+								<td>{{ llog.NameProcess }}</td>
+								<td>{{ llog.StatusFlag }}</td>
+								<td>{{ llog.IDBot }}</td>
+								<td>{{ llog.IDChat }}</td>
+								<td>{{ llog.CourseName }}</td>
+								<td>{{ llog.Started }}</td>
+								<td>{{ llog.Stopped }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>Статус запуска</p>
+						{% for status in status %}
+							<tr class='success'>
+								<td>{{ status.id }}</td>
+								<td>{{ status.status_flag_name }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<hr>
+						<br>
+						<p>TEMP DB Ready for start process</p>
+						{% for rfs in rfs %}
+							<tr class='success'>
+								<td>{{ rfs.id }}</td>
+								<td>{{ rfs.NameProcess }}</td>
+								<td>{{ rfs.IDBot }}</td>
+								<td>{{ rfs.IDChat }}</td>
+								<td>{{ rfs.CourseName }}</td>
+								<td>{{ rfs.CourseFolder }}</td>
+								<td>{{ rfs.Q_step }}</td>
+								<td>{{ rfs.QorDelay }}</td>
+								<br>
+							</tr>
+						{% endfor %}
+						<br>
+						<br>
+					</main>
+				</div>
+				<aside class="leftcol">
+					<p>Left</p>
+				</aside>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="wrp">
+			<p>Footer</p>
+		</div>
+	</footer>
+</body>
+</html>
